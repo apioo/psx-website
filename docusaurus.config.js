@@ -86,6 +86,12 @@ const config = {
             label: 'Integration',
           },
           {
+            type: 'doc',
+            docId: 'components',
+            position: 'left',
+            label: 'Components',
+          },
+          {
             href: 'https://github.com/apioo/psx',
             label: 'GitHub',
             position: 'right',
