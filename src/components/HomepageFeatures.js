@@ -1,11 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
 import styles from './HomepageFeatures.module.css';
+import { AiOutlineCodeSandbox } from "react-icons/ai";
+import { BiCodeBlock } from "react-icons/bi";
+import { VscDebugDisconnect } from "react-icons/vsc";
 
 const FeatureList = [
   {
     title: 'OpenAPI',
-    Svg: require('../../static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: AiOutlineCodeSandbox,
     description: (
       <>
         Generate an OpenAPI specification from PHP attributes and <abbr title="Plain Old PHP Objects">POPOs</abbr>.
@@ -14,7 +17,7 @@ const FeatureList = [
   },
   {
     title: 'Client SDK',
-    Svg: require('../../static/img/undraw_docusaurus_tree.svg').default,
+    Svg: BiCodeBlock,
     description: (
       <>
         Generate Client SDKs based on the meta data which you have provided to describe your endpoints.
@@ -23,7 +26,7 @@ const FeatureList = [
   },
   {
     title: 'Integration',
-    Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
+    Svg: VscDebugDisconnect,
     description: (
       <>
         Use our components at the framework of your choice.
