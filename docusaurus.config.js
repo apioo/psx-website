@@ -75,12 +75,6 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'model',
-            position: 'left',
-            label: 'Model',
-          },
-          {
-            type: 'doc',
             docId: 'integration',
             position: 'left',
             label: 'Integration',
@@ -121,10 +115,6 @@ const config = {
                 to: '/docs/data',
               },
               {
-                label: 'Model',
-                to: '/docs/model',
-              },
-              {
                 label: 'Integration',
                 to: '/docs/integration',
               },
@@ -144,10 +134,6 @@ const config = {
               {
                 label: 'Data',
                 href: 'https://github.com/apioo/psx-data',
-              },
-              {
-                label: 'Model',
-                href: 'https://github.com/apioo/psx-model',
               },
             ],
           },

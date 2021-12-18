@@ -10,9 +10,8 @@ specification or client SDKs.
 
 ## Usage
 
-The root model object is called a `Specification` which then contains a `ResourceCollection` and `DefinitionsInterface`.
-The `ResourceCollection` contains all available metadata of your endpoints and the `DefinitionsInterface` contains
-the available schemas.
+The root model object is called a `Specification` which then contains a resources and definitions. The resources contain
+all available metadata of your endpoints and the definitions represent the available schemas.
 
 ### Framework
 
@@ -51,12 +50,12 @@ class MyController
 ```
 
 This would be then enough for the API component to generate either an OpenAPI specification or a client SDK.
-Note this library only needs the meta information how your framework route the actual request to your method and which
-parameters are passed to the controller method depends always on your framework.
+Note this library only needs the meta information, if you can get those meta information at your framework in another
+way you can also implement a custom `ParserInterface`.
 
 ### Standalone
 
-Besides the framework integration you can use this component also to simply parse existing OpenAPI specifications and
+Beside the framework integration you can use this component also to simply parse existing OpenAPI specifications and
 generate specific output. The following is a simple example how to use the PHP API and how to generate code.
 
 ```php

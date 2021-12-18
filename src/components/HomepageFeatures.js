@@ -26,7 +26,7 @@ const FeatureList = [
     Svg: require('../../static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Generate your models in different languages and re-use them at the frontend.
+        Use our components at the framework of your choice.
       </>
     ),
   },
