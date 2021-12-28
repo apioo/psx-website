@@ -25,7 +25,7 @@ The following page lists all components:
 | [psx/sandbox](https://github.com/apioo/psx-sandbox)         | Execute PHP code in a sandbox |
 | [psx/sql](https://github.com/apioo/psx-sql)                 | Build complex data structures from relational databases |
 
-## Value Objects
+## Data structure
 
 | Repository    | Description   |
 | ------------- | ------------- |

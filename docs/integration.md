@@ -27,7 +27,7 @@ you a first impression a normal controller in PSX always represents a HTTP resou
 <?php
 
 #[Description('Collection endpoint')]
-class CollectionPopo extends SchemaApiAbstract
+class CollectionPopo extends ControllerAbstract
 {
     #[Inject]
     private Population $populationService;
