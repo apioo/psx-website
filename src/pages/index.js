@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <Layout
       title={`REST API PHP Components`}
-      description="A modern set of PHP components to build type-save APIs">
+      description="A modern set of PHP components to build type-safe APIs">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
