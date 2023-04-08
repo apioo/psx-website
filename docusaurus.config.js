@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'PSX',
-  tagline: 'A modern set of PHP components to simplify API development',
+  tagline: 'An innovative PHP framework dedicated to build fully typed REST APIs.',
   url: 'https://phpsx.org',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -60,33 +60,27 @@ const config = {
           },
           {
             type: 'doc',
-            docId: 'api',
+            docId: 'components/api',
             position: 'left',
             label: 'API',
           },
           {
             type: 'doc',
-            docId: 'schema',
+            docId: 'components/schema',
             position: 'left',
             label: 'Schema',
           },
           {
             type: 'doc',
-            docId: 'data',
+            docId: 'components/data',
             position: 'left',
             label: 'Data',
           },
           {
             type: 'doc',
-            docId: 'integration',
+            docId: 'components/sql',
             position: 'left',
-            label: 'Integration',
-          },
-          {
-            type: 'doc',
-            docId: 'components',
-            position: 'left',
-            label: 'Components',
+            label: 'SQL',
           },
           {
             href: 'https://github.com/apioo/psx',
@@ -107,19 +101,19 @@ const config = {
               },
               {
                 label: 'API',
-                to: '/docs/api',
+                to: '/docs/components/api',
               },
               {
                 label: 'Schema',
-                to: '/docs/schema',
+                to: '/docs/components/schema',
               },
               {
                 label: 'Data',
-                to: '/docs/data',
+                to: '/docs/components/data',
               },
               {
-                label: 'Integration',
-                to: '/docs/integration',
+                label: 'SQL',
+                to: '/docs/components/sql',
               },
             ],
           },
@@ -137,6 +131,10 @@ const config = {
               {
                 label: 'Data',
                 href: 'https://github.com/apioo/psx-data',
+              },
+              {
+                label: 'SQL',
+                href: 'https://github.com/apioo/psx-sql',
               },
             ],
           },
