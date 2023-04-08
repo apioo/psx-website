@@ -71,7 +71,7 @@ distinct possible you can also use attributes to explicit declare the mapping, p
 
 Since PSX uses the symfony DI container all controller classes are automatically loaded through auto-wiring. This means
 you can simply define at the constructor all dependencies which are needed for your controller. Please take a look at
-the [container.php](resources/container.php) if you want to customize which classes are loaded.
+the [container.php](https://github.com/apioo/psx/blob/master/resources/container.php) if you want to customize which classes are loaded.
 
 ## SDK
 
@@ -111,7 +111,7 @@ list shows some supported formats.
 To enable this SDK generation PSX needs to understand the structure of the incoming or outgoing JSON payload. This is
 done by using DTO models for every argument and return type. PSX contains a model generator which allows you to generate
 those models based on a [TypeSchema](https://typeschema.org/) specification. Please take a look at the
-[typeschema.json](./resources/typeschema.json) file which contains the models for our demo API. You can generate all
+[typeschema.json](https://github.com/apioo/psx/blob/master/resources/typeschema.json) file which contains the models for our demo API. You can generate all
 models using the following command s.
 
 ```
