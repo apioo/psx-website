@@ -1,4 +1,11 @@
-FROM httpd:2.4-alpine
-MAINTAINER Christoph Kappestein <christoph.kappestein@apioo.de>
-LABEL description="PSX website"
-COPY ./build /usr/local/apache2/htdocs/
+#stage 1
+FROM node:alpine as node
+ENV NODE_OPTIONS=--openssl-legacy-provider
+WORKDIR /app
+COPY . .
+RUN npm install
+RUN npm run build --prod
+#stage 2
+FROM nginx:alpine
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=node /app/build /usr/share/nginx/html
