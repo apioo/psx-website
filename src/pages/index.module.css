@@ -9,6 +9,8 @@
   position: relative;
   overflow: hidden;
   color: #b2ff59;
+  background-color: #222;
+  background-image: url("/static/img/bg.jpg");
 }
 
 @media screen and (max-width: 966px) {
