@@ -136,18 +136,30 @@ const config = {
                 label: 'SQL',
                 href: 'https://github.com/apioo/psx-sql',
               },
+              {
+                label: 'Packagist',
+                href: 'https://packagist.org/packages/psx/',
+              },
             ],
           },
           {
             title: 'More',
             items: [
               {
-                label: 'GitHub',
-                href: 'https://github.com/apioo/psx',
+                label: 'Discord',
+                href: 'https://discord.gg/eMrMgwsc6e',
+              },
+              {
+                label: 'Contact',
+                href: 'https://www.fusio-project.org/contact',
               },
               {
                 label: 'Fusio',
                 href: 'https://www.fusio-project.org/',
+              },
+              {
+                label: 'TypeAPI',
+                href: 'https://typeapi.org/',
               },
               {
                 label: 'TypeSchema',
@@ -156,10 +168,6 @@ const config = {
               {
                 label: 'Twitter',
                 href: 'https://twitter.com/FusioAPI',
-              },
-              {
-                label: 'Packagist',
-                href: 'https://packagist.org/packages/psx/',
               },
             ],
           },
