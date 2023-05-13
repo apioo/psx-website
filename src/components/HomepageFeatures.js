@@ -4,7 +4,8 @@ import styles from './HomepageFeatures.module.css';
 import {AiOutlineCodeSandbox} from "react-icons/ai";
 import {BiCodeBlock} from "react-icons/bi";
 import {VscDebugDisconnect} from "react-icons/vsc";
-import {DiDoctrine, DiSymfonyBadge, SiOpenapiinitiative} from "react-icons/all";
+import {DiDoctrine, DiSymfonyBadge} from "react-icons/di";
+import {SiOpenapiinitiative} from "react-icons/si";
 
 const FeatureList = [
     {
