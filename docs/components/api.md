@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # API
 
-The API component is the reference implementation of the [TypeAPI](http://typeapi.org/) specification.
+The API component is the reference implementation of the [TypeAPI](https://typeapi.org/) specification.
 It provides models to describe an REST API and generate based on those models different outputs. You can create those
 models either by parsing a TypeAPI or OpenAPI specification or by using PHP Attributes. Based on those models it is then
 possible to generate i.e. client SDKs.
@@ -27,14 +27,14 @@ class MyController
 {
     #[Get]
     #[Path('/my/endpoint/:id')]
-    public function getModel(int $id, int $year): \My\Response\Model
+    public function getModel(#[Param] int $id, #[Query] int $year): \My\Response\Model
     {
         // @TODO implement
     }
     
     #[Post]
     #[Path('/my/endpoint')]
-    public function insertModel(\My\Request\Model $model): \My\Response\Model
+    public function insertModel(#[Body] \My\Request\Model $model): \My\Response\Model
     {
         // @TODO implement
     }
@@ -54,8 +54,11 @@ generate specific output. The following is a simple example how to use the PHP A
 ```php
 <?php
 
+// use the API manager to obtain a specification from different sources
+$manager = new \PSX\Api\ApiManager(new \PSX\Schema\SchemaManager());
+
 // reads the TypeAPI specification and generates a specification
-$specification = \PSX\Api\Parser\TypeAPI::fromFile('typeapi.json');
+$specification = $manager->getApi('./typeapi.json');
 
 // contains all schema type definitions
 $definitions = $specification->getDefinitions();
@@ -79,7 +82,8 @@ $operation->getMethod();
 $operation->getPath();
 
 // creates a PHP client which consumes the defined operations
-$generator = new \PSX\Api\Generator\Client\Php();
+$registry = \PSX\Api\GeneratorFactory::fromLocal()->factory();
+$generator = $registry->getGenerator(\PSX\Api\Repository\LocalRepository::CLIENT_PHP)
 
 $source = $generator->generate($resource);
 
@@ -89,8 +93,6 @@ $source = $generator->generate($resource);
 
 ### Client
 
-- Go
-- Java
 - PHP
 - Typescript
 
@@ -102,5 +104,5 @@ $source = $generator->generate($resource);
 
 ### Spec
 
-- [OpenAPI 3.1](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md)
+- [OpenAPI](https://github.com/OAI/OpenAPI-Specification)
 - [TypeAPI](https://typeapi.org/)
