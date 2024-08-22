@@ -29,8 +29,8 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`REST API PHP Components`}
-      description="A modern set of PHP components to build type-safe APIs">
+      title={`REST API PHP Framework`}
+      description="A framework and modern set of PHP components to build type-safe APIs">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
