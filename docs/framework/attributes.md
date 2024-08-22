@@ -10,14 +10,14 @@ class Population extends ControllerAbstract
 {
     #[Get]
     #[Path('/population')]
-    public function getAll(?int $startIndex = null, ?int $count = null): Model\PopulationCollection
+    public function getAll(#[Query] ?int $startIndex = null, #[Query] ?int $count = null): Model\PopulationCollection
     {
         return $this->populationTable->getCollection($startIndex, $count);
     }
 
     #[Post]
     #[Path('/population')]
-    public function create(Model\Population $payload): Model\Message
+    public function create(#[Body] Model\Population $payload): Model\Message
     {
         $id = $this->populationService->create($payload);
 
@@ -34,22 +34,23 @@ PSX tries to automatically add the missing attributes based on the defined argum
 If you like to explicit define the values you can use the following attributes.
 
 
-| Attribute     | Target        | Example                        | Description                            |
-|---------------|---------------|--------------------------------|----------------------------------------|
-| Authorization | Class/Method  | #[Authorization(true)]         | The operation needs authorization      |
-| Delete        | Class/Method  | #[Delete()]                    | HTTP DELETE method                     |
-| Deprecated    | Class/Method  | #[Deprecated(true)]            | The operation is deprecated            |
-| Description   | Class/Method  | #[Description("foobar")]       | Description of this operation          |
-| Exclude       | Class/Method  | #[Exclude]                     | Whether to exclude this operation      |
-| Get           | Class/Method  | #[Get()]                       | HTTP GET method                        |
-| Incoming      | Class/Method  | #[Incoming()]                  | Describes incoming request data        |
-| OperationId   | Class/Method  | #[OperationId("my_method")]    | The operation id                       |
-| Outgoing      | Class/Method  | #[Outgoing()]                  | Describes outgoing response data       |
-| Patch         | Class/Method  | #[Patch()]                     | HTTP PATCH method                      |
-| Path          | Class/Method  | #[Path("/endpoint")]           | The endpoint path                      |
-| PathParam     | Class/Method  | #[PathParam()]                 | Describes variable path parameters     |
-| Post          | Class/Method  | #[Post()]                      | HTTP POST method                       |
-| Put           | Class/Method  | #[Put()]                       | HTTP PUT method                        |
-| QueryParam    | Class/Method  | #[QueryParam()]                | Describes query parameters             |
-| Security      | Class/Method  | #[Security(["scope"])]         | The scopes assigned to this operations |
-| Tags          | Class/Method  | #[Tags(["tag"])]               | Tags assigned to this operation        |
+| Attribute     | Target       | Example                     | Description                                           |
+|---------------|--------------|-----------------------------|-------------------------------------------------------|
+| Authorization | Class/Method | #[Authorization(true)]      | The operation needs authorization                     |
+| Body          | Parameter    | #[Body]                     | Maps an argument to the HTTP body payload             |
+| Delete        | Class/Method | #[Delete]                   | HTTP DELETE method                                    |
+| Deprecated    | Class/Method | #[Deprecated(true)]         | The operation is deprecated                           |
+| Description   | Class/Method | #[Description("foobar")]    | Description of this operation                         |
+| Exclude       | Class/Method | #[Exclude]                  | Whether to exclude this operation                     |
+| Get           | Class/Method | #[Get]                      | HTTP GET method                                       |
+| Header        | Parameter    | #[Header]                   | Maps an argument to a value from the HTTP header      |
+| OperationId   | Class/Method | #[OperationId("my.method")] | The operation id                                      |
+| Param         | Parameter    | #[Param]                    | Maps an argument to a dynamic path fragment           |
+| Patch         | Class/Method | #[Patch]                    | HTTP PATCH method                                     |
+| Path          | Class/Method | #[Path("/endpoint")]        | The endpoint path                                     |
+| Post          | Class/Method | #[Post]                     | HTTP POST method                                      |
+| Put           | Class/Method | #[Put]                      | HTTP PUT method                                       |
+| Query         | Parameter    | #[Query]                    | Maps an argument to a value from the query parameters |
+| Security      | Class/Method | #[Security(["scope"])]      | The scopes assigned to this operations                |
+| StatusCode    | Class/Method | #[StatusCode(201)]          | Describes the response status code                    |
+| Tags          | Class/Method | #[Tags(["tag"])]            | Tags assigned to this operation                       |
