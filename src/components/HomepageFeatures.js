@@ -161,7 +161,9 @@ export default function HomepageFeatures() {
                         a complete type-safe client SDK to communicate with your API.</p>
                     </div>
                     <div className="col col--12">
-                        <CodeBlock language="text" title="Console" showLineNumbers>{`php bin/psx generate:sdk`}</CodeBlock>
+                        <CodeBlock language="text" title="Console" showLineNumbers>{`php bin/psx generate:sdk spec-openapi
+php bin/psx generate:sdk client-typescript
+php bin/psx generate:sdk client-php`}</CodeBlock>
                     </div>
                 </div>
             </div>
