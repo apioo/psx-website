@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
-# Introduction
+## About
 
 __PSX is an innovative PHP framework dedicated to build fully typed REST APIs.__
 
@@ -23,7 +23,9 @@ More information about PSX at [phpsx.org](https://phpsx.org/).
 
 To install the framework you can simply install this demo API project.
 
-    php composer.phar create-project psx/psx .
+```
+composer create-project psx/psx .
+```
 
 ## Getting started
 
@@ -106,8 +108,8 @@ list shows some supported formats.
 To enable this SDK generation PSX needs to understand the structure of the incoming or outgoing JSON payload. This is
 done by using DTO models for every argument and return type. PSX contains a model generator which allows you to generate
 those models based on a [TypeSchema](https://typeschema.org/) specification. Please take a look at the
-[typeschema.json](https://github.com/apioo/psx/blob/master/resources/typeschema.json) file which contains the models for our demo API. You can generate all
-models using the following command s.
+[typeschema.json](https://github.com/apioo/psx/blob/master/resources/typeschema.json) file which contains the models for
+our demo API. You can generate all models using the following command s.
 
 ```
 php bin/psx generate:model
