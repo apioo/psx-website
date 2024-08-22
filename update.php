@@ -20,7 +20,7 @@ foreach ($files as $source => $dest) {
 
     $content = file_get_contents($source);
     if (str_ends_with($dest, 'intro.md')) {
-        $content = str_replace('## About', '## Introduction', $content);
+        $content = str_replace('## About', '# Introduction', $content);
     }
 
     $prefix = <<<TEXT

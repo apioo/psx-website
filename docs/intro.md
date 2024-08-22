@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-## Introduction
+# Introduction
 
 __PSX is an innovative PHP framework dedicated to build fully typed REST APIs.__
 
