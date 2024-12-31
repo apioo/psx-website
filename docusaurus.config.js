@@ -6,7 +6,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'PSX',
-  tagline: 'An innovative PHP framework dedicated to build fully typed REST APIs.',
+  tagline: 'A PHP framework and set of components to build fully typed REST APIs.',
   url: 'https://phpsx.org',
   baseUrl: '/',
   onBrokenLinks: 'throw',

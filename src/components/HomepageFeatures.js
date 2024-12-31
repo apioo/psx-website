@@ -95,7 +95,7 @@ export default function HomepageFeatures() {
                         <p className="hero__subtitle">PSX allows you to define complete type-safe controllers which map
                             every value from the HTTP request to an argument.
                             This idea is inspired by great frameworks like <a href="https://spring.io/">Spring</a> or <a
-                            href="https://nestjs.com/">NestJS</a>.</p>
+                                href="https://nestjs.com/">NestJS</a>.</p>
                     </div>
                     <div className="col col--12">
                         <CodeBlock language="php" title="src/Controller/Population.php" showLineNumbers>{`class Population extends ControllerAbstract
@@ -157,14 +157,21 @@ export default function HomepageFeatures() {
                         <hr></hr>
                         <h1 className="hero__title">Client SDK</h1>
                         <p className="hero__subtitle">One of the innovative features of PSX is, that you can automatically
-                        generate a client SDK for your API. Through a simple command you can generate
-                        a complete type-safe client SDK to communicate with your API.</p>
+                            generate a client SDK for your API. Through a simple command you can generate
+                            a complete type-safe client SDK to communicate with your API.</p>
                     </div>
                     <div className="col col--12">
                         <CodeBlock language="text" title="Console" showLineNumbers>{`php bin/psx generate:sdk spec-openapi
 php bin/psx generate:sdk client-typescript
 php bin/psx generate:sdk client-php`}</CodeBlock>
                     </div>
+                </div>
+                <div className="col col--12 text--center">
+                    <hr></hr>
+                    <h1 className="hero__title">Symfony Bundle</h1>
+                    <p className="hero__subtitle">In case you are a fan of <a href="https://symfony.com/">Symfony</a> you can
+                        simply use the <a href="https://github.com/apioo/psx-api-bundle">PSX API Bundle</a> to integrate all
+                        PSX features.</p>
                 </div>
             </div>
         </section>
