@@ -4,10 +4,13 @@ sidebar_position: 2
 
 # API
 
-The API component is the reference implementation of the [TypeAPI](https://typeapi.org/) specification.
-It provides models to describe an REST API and generate based on those models different outputs. You can create those
-models either by parsing a TypeAPI or OpenAPI specification or by using PHP Attributes. Based on those models it is then
-possible to generate i.e. client SDKs.
+This library provides an attribute parser to dynamically generate a [TypeAPI](https://typeapi.org/) specification
+from any controller (code-first). Based on the specification it is then possible to generate client SDKs or
+an OpenAPI specification.
+
+We provide also a hosted version of this [code generator](https://typeapi.org/generator).
+For more integration options you can also take a look at the [SDKgen](https://sdkgen.app/) project
+which provides a CLI binary or GitHub action to integrate the code generator.
 
 ## Usage
 
@@ -42,7 +45,7 @@ class MyController
 
 ```
 
-This would be then enough for the API component to generate either an OpenAPI specification or a client SDK.
+This would be enough for the API component to generate either an OpenAPI specification or a client SDK.
 Note this library only needs the meta information, if you can get those meta information at your framework in another
 way you can also implement a custom `ParserInterface`.
 
@@ -88,21 +91,3 @@ $generator = $registry->getGenerator(\PSX\Api\Repository\LocalRepository::CLIENT
 $source = $generator->generate($resource);
 
 ```
-
-## Generator
-
-### Client
-
-- PHP
-- Typescript
-
-### Markup
-
-- Client
-- HTML
-- Markdown
-
-### Spec
-
-- [OpenAPI](https://github.com/OAI/OpenAPI-Specification)
-- [TypeAPI](https://typeapi.org/)
