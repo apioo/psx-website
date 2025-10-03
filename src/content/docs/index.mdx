@@ -54,7 +54,7 @@ export const controller = `final class PostController extends AbstractController
 }
 `;
 
-export const dto = `class Post implements \JsonSerializable, \PSX\Record\RecordableInterface
+export const dto = `class Post implements \\JsonSerializable, \\PSX\\Record\\RecordableInterface
 {
     protected ?string $title = null;
     public function setTitle(?string $title): void
@@ -65,10 +65,10 @@ export const dto = `class Post implements \JsonSerializable, \PSX\Record\Recorda
     {
         return $this->title;
     }
-    public function toRecord(): \PSX\Record\RecordInterface
+    public function toRecord(): \\PSX\\Record\\RecordInterface
     {
-        /** @var \PSX\Record\Record<mixed> $record */
-        $record = new \PSX\Record\Record();
+        /** @var \\PSX\\Record\\Record<mixed> $record */
+        $record = new \\PSX\\Record\\Record();
         $record->put('title', $this->title);
         return $record;
     }
