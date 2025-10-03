@@ -1,0 +1,122 @@
+---
+title: Attributes
+description: A reference page in my new Starlight docs site.
+---
+
+import { Code } from '@astrojs/starlight/components';
+
+export const http_request = `POST /project/12?search=foo
+Content-Type: application/json
+X-Version: 1.2
+
+{
+  "foo": "bar"
+}
+`;
+
+export const new_controller = `final class Projects extends AbstractController
+{
+    #[Route('/projects/{uuid}', methods: ['GET'])]
+    #[Description('Get project by UUID.')]
+    #[OperationId('get-project-by-uuid')]
+    public function project_by_uuid(#[Param] string $uuid): Project
+    {
+    }
+}
+`;
+
+The following page lists all available attributes which you can use at your controller.
+
+## HTTP
+
+### Param
+
+<Code code={http_request} lang="http" title="HTTP" mark="12" />
+
+Resolves a dynamic path fragment from the path, i.e. for a path like `/project/{id}` you can use an argument `#[Param] int $id`
+to get the id value.
+
+### Query
+
+<Code code={http_request} lang="http" title="HTTP" mark="search=foo" />
+
+Resolves query parameter, i.e. you can use an argument `#[Query] ?string $search` to
+get the search value. Query arguments can be always nullable.
+
+### Header
+
+<Code code={http_request} lang="http" title="HTTP" mark="X-Version: 1.2" />
+
+Resolves a header value, i.e. you can use an argument `#[Header('X-Version')] ?string $version` to
+get the header value. As first value of the attribute you can specify a concrete name, otherwise
+we try to build the name based on the argument name.
+
+### Body
+
+<Code code={http_request} lang="http" title="HTTP" mark="bar" />
+
+Resolves the body payload, i.e. you can use an argument `#[Body] MyDTO $payload` to parse the
+request payload into the DTO. Note your method must only have one `#[Body]` argument.
+
+## Meta
+
+### Description
+
+<Code code={new_controller} lang="php" title="Controller" mark="#[Description('Get project by UUID.')]" />
+
+Can be used at your controller method to add a general description to this operation.
+
+### OperationId
+
+<Code code={new_controller} lang="php" title="Controller" mark="#[OperationId('get-project-by-uuid')]" />
+
+Can be used at your controller method to specify a concrete operation id, otherwise we generate the
+operation id based on the method and controller name.
+
+### Deprecated
+
+Can be used to indicate that this operation is deprecated, this is then also reflected
+at the specification and client SDK.
+
+## Type-hints
+
+We always recommend to generate concrete DTOs to describe the request and response payloads.
+If you need a raw payload we provide the following type-hints to receive a raw value.
+
+* `Psr\Http\Message\StreamInterface`
+  * Receive the raw request as stream `application/octet-stream`
+* `PSX\Data\Body\Json`
+  * Receive the raw request as JSON `application/json`
+* `PSX\Data\Body\Form`
+  * Receive the raw request as form `application/x-www-form-urlencoded`
+* `string`
+  * Receive the raw request as string `text/plain`
+
+For example to write a simple proxy method which returns the provided JSON payload s.
+
+```php
+#[Route('/post', methods: ['POST'])]
+public function create(#[Body] Json $body): Json
+{
+    return $body;
+}
+```
+
+## Multiple response types
+
+In case your method can return different response types you can use the `#[Outgoing]` attribute to
+define a response schema independent of the return type.
+
+```php
+#[Route('/post', methods: ['POST'])]
+#[Outgoing(201, Message::class)]
+#[Outgoing(400, Error::class)]
+public function create(#[Body] Post $body): JsonResponse
+{
+    if (empty($body->getTitle())) {
+        return new JsonResponse(new Error('An error occurred'), 400);
+    }
+
+    return new JsonResponse(new Message('Post successfully created'), 201);
+}
+```
