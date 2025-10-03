@@ -1,6 +1,6 @@
 ---
 title: Framework
-description: A reference page in my new Starlight docs site.
+description: Use PSX as lightweight API framework to integrate the components
 ---
 
 In case you can't use one of our integrations we also provide a lightweight

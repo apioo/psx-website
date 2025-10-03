@@ -1,6 +1,6 @@
 ---
 title: Custom
-description: A reference page in my new Starlight docs site.
+description: Describes how you can integrate our API components into you custom app
 ---
 
 This page describes how you can integrate our API components into you custom app.

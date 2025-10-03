@@ -1,6 +1,6 @@
 ---
 title: Symfony
-description: A reference page in my new Starlight docs site.
+description: Symfony integration of the PSX API components
 ---
 
 ## Installation
