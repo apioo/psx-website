@@ -1,0 +1,175 @@
+---
+title: Build type-safe REST APIs
+description: PSX provides a set of PHP components to build type-safe APIs
+template: splash
+hero:
+  tagline: PSX provides a set of PHP components to build type-safe APIs with automatic OpenAPI and SDK generation
+  image:
+    alt: A glittering, brightly colored logo
+    dark: ../../assets/bg.webp
+    light: ../../assets/bg.webp
+  actions:
+    - text: Get started
+      link: /get-started
+      icon: right-arrow
+---
+
+import { Card, CardGrid, Code, LinkButton, Tabs, TabItem } from '@astrojs/starlight/components';
+
+export const controller = `final class PostController extends AbstractController
+{
+    public function __construct(private PostService $service)
+    {
+    }
+
+    #[Route('/post', methods: ['GET'])]
+    public function getAll(#[Query] ?string $filter): PostCollection
+    {
+        return $this->service->findAll($filter);
+    }
+
+    #[Route('/post/{id}', methods: ['GET'])]
+    public function get(#[Param] int $id): Post
+    {
+        return $this->service->find($id);
+    }
+
+    #[Route('/post', methods: ['POST'])]
+    public function create(#[Body] Post $payload): Message
+    {
+        return $this->service->create($payload);
+    }
+
+    #[Route('/post/{id}', methods: ['PUT'])]
+    public function update(#[Param] int $id, #[Body] Post $payload): Message
+    {
+        return $this->service->update($id, $payload);
+    }
+
+    #[Route('/post/{id}', methods: ['DELETE'])]
+    public function delete(#[Param] int $id): Message
+    {
+        return $this->service->delete($id);
+    }
+}
+`;
+
+export const dto = `class Post implements \JsonSerializable, \PSX\Record\RecordableInterface
+{
+    protected ?string $title = null;
+    public function setTitle(?string $title): void
+    {
+        $this->title = $title;
+    }
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+    public function toRecord(): \PSX\Record\RecordInterface
+    {
+        /** @var \PSX\Record\Record<mixed> $record */
+        $record = new \PSX\Record\Record();
+        $record->put('title', $this->title);
+        return $record;
+    }
+    public function jsonSerialize(): object
+    {
+        return (object) $this->toRecord()->getAll();
+    }
+}
+`;
+
+export const client = `const client = new Client('https://api.acme.com', new HttpBearer('my_token'));
+
+const collection = await client.post().getAll();
+const post = await client.post().get(1);
+const message = await client.post().create({title: 'My new post'});
+const message = await client.post().update(2, {title: 'My updated post'});
+const message = await client.post().delete(2);
+`;
+
+export const typeschema = `{
+  "definitions": {
+    "Post": {
+      "type": "struct",
+      "properties": {
+        "title": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "root": "Post"
+}
+`;
+
+<CardGrid stagger>
+	<Card title="OpenAPI generation" icon="document">
+	    Instead of adding many attributes to each controller our components
+	    build the specification based on your controller arguments and DTO classes.
+	</Card>
+	<Card title="DTO generation" icon="pencil">
+	    We provide a console command to automatically generate DTOs based on
+	    a [TypeSchema](https://typeschema.org/) specification, which helps
+	    to easily generate DTOs to describe your API.
+	</Card>
+	<Card title="SDK generation" icon="download">
+	    We provide an advanced SDK generator which allows you to automatically
+	    generate client SDKs i.e. for TypeScript or PHP.
+	</Card>
+	<Card title="Framework independent" icon="setting">
+	    Our components are framework independent, we support [Symfony](./integration/symfony) and [Laravel](./integration/laravel)
+	    and you can easily integrate them into your [custom framework](./integration/custom).
+	</Card>
+</CardGrid>
+
+## Integration
+
+To give you a first impression, the following code shows a simple CRUD controller of our [Symfony integration](./integration/symfony):
+
+<Code code={controller} lang="php" title="src/Controller/PostController.php" />
+
+The `Query`, `Param` and `Body` attributes are PSX specific and describe values from the HTTP request.
+With PSX the idea is that your controller never interacts with a raw request object instead the controller
+defines all HTTP parameter as argument. Through this it is possible to combine OpenAPI/SDK generation
+with the actual controller code.
+
+## SDK
+
+The code above is enough to automatically generate an OpenAPI specification or TypeScript SDK which can be used at any frontend
+for type-safe communication s.
+
+```
+php bin/console generate:sdk spec-openapi
+php bin/console generate:sdk client-typescript
+```
+
+<Code code={client} lang="typescript" title="TypeScript" />
+
+
+## DTO
+
+To describe the request and response data in your controller you need to build DTOs. You can do this manually
+but we also provide a powerful [TypeSchema](https://typeschema.org/) based DTO generator which helps with this task.
+
+```
+php bin/console generate:model
+```
+
+<Tabs>
+  <TabItem label="Specification">
+    <Code code={typeschema} lang="json" title="TypeSchema" />
+  </TabItem>
+  <TabItem label="Code">
+    <Code code={dto} lang="php" title="PHP" />
+  </TabItem>
+</Tabs>
+
+
+----
+
+For more information you can start by choosing one of our integration options.
+
+<LinkButton href="/integration/symfony">Symfony</LinkButton>
+<LinkButton href="/integration/laravel">Laravel</LinkButton>
+<LinkButton href="/integration/custom">Custom</LinkButton>

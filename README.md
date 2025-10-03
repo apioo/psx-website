@@ -1,6 +1,6 @@
 
-# PSX Documentation
+# Build type-safe REST APIs
 
-This repository contains the official documentation of the [PSX](https://phpsx.org/) components. We have a script to
-sync the readme files of the different components into this repository, so if you like to adjust the documentation
-please open a PR at the fitting repository of a component.
+PSX provides a set of PHP components to build type-safe APIs with automatic OpenAPI and SDK generation.
+
+This repository contains the website for https://phpsx.org

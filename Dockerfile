@@ -1,8 +1,9 @@
-FROM node:alpine as node
-ENV NODE_OPTIONS=--openssl-legacy-provider
+FROM node:lts AS build
 WORKDIR /app
 COPY . .
-RUN npm install
+RUN npm i
 RUN npm run build
+
+FROM httpd:2.4 AS runtime
+COPY --from=build /app/dist /usr/local/apache2/htdocs/
 EXPOSE 80
-CMD ["npm", "run", "serve", "--", "--port", "80", "--host", "0.0.0.0"]

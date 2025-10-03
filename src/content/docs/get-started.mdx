@@ -1,0 +1,112 @@
+---
+title: Get Started
+description: A guide in my new Starlight docs site.
+---
+
+import { Code, LinkButton } from '@astrojs/starlight/components';
+
+export const old_controller = `class ProjectController extends Controller
+{
+    #[OA\Get(
+        summary: 'Get',
+        description: 'Get project by UUID.',
+        path: '/projects/{uuid}',
+        operationId: 'get-project-by-uuid',
+        parameters: [
+            new OA\Parameter(name: 'uuid', in: 'path', required: true, description: 'Project UUID', schema: new OA\Schema(type: 'string')),
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'Project details',
+                content: new OA\JsonContent(ref: '#/components/schemas/Project')),
+        ]
+    )]
+    public function project_by_uuid(Request $request)
+    {
+    }
+}
+`;
+
+export const new_controller = `final class Projects extends AbstractController
+{
+    #[Route('/projects/{uuid}', methods: ['GET'])]
+    #[Description('Get project by UUID.')]
+    #[OperationId('get-project-by-uuid')]
+    public function project_by_uuid(#[Param] string $uuid): Project
+    {
+    }
+}
+`;
+
+export const new_controller_query = `final class Projects extends AbstractController
+{
+    #[Route('/projects/{uuid}', methods: ['GET'])]
+    #[Description('Get project by UUID.')]
+    #[OperationId('get-project-by-uuid')]
+    public function project_by_uuid(#[Param] string $uuid, #[Query] string $version): Project
+    {
+    }
+}
+`;
+
+From a high level perspective our components try to improve how PHP apps
+can generate OpenAPI specifications and client SDKs. One popular option
+to automatically generate an OpenAPI specification is the package
+[zircote/swagger-php](https://github.com/zircote/swagger-php) which basically allows
+you to attach OpenAPI specific attributes to your controller and generate based on
+this your specification.
+
+At first this looks nice, but it has some problems. The attributes are only related
+to the OpenAPI specification i.e. you need to add a `Get` attribute and path for the
+OpenAPI specification and the framework itself needs also the same information for routing.
+You also need to describe the request and response payloads completely independent
+of your actual code, which makes it likely that your schema diverges from the
+actual code. The following is an example from a live project s.
+
+<Code code={old_controller} lang="php" title="Controller" />
+
+You see that the OpenAPI attributes are completely separated from the actual framework
+code. With the PSX components we try to combine the specification generation with the actual
+code. For example the above controller would look with our Symfony integration
+like:
+
+<Code code={new_controller} lang="php" title="Controller" />
+
+Our generator uses the framework specific routing information and the argument
+and return type to build the specification. This works only, in case we use DTOs as argument
+and return type so that we can automatically build a schema based on the DTO.
+If your controller returns a generic response object we are not able to generate a schema.
+The real magic is that your code and schema specification use now the same source, i.e. if
+we add a new query parameter our specification would also automatically reflect this.
+
+<Code code={new_controller_query} lang="php" title="Controller" mark="$version" />
+
+Besides an OpenAPI specification our components include a sophisticated client SDK code
+generator so that you can automatically generate a type-safe client SDK for your API.
+We try to build a similar experience like [tRPC](https://trpc.io/) but based
+on a classical REST API and programming language independent, which could be a
+great evolution for API development in PHP.
+
+Each integration registers the following commands:
+
+* Generate Client SDKs for different languages i.e. TypeScript and PHP
+  ```
+  php bin/console generate:sdk client-typescript
+  ```
+* Generate OpenAPI specification without additional attributes
+  ```
+  php bin/console generate:sdk spec-openapi
+  ```
+* Generate DTO classes using TypeSchema
+  ```
+  php bin/console generate:model
+  ```
+
+How you invoke the console script is of course specific to the framework, `php bin/console`
+is used by Symfony and Laravel uses `php artisan` but the commands are registered in the same
+way. If you like to try out our components please select one of our integrations.
+
+<LinkButton href="/integration/symfony" variant="secondary">Symfony</LinkButton>
+<LinkButton href="/integration/laravel" variant="secondary">Laravel</LinkButton>
+<LinkButton href="/integration/custom" variant="secondary">Custom</LinkButton>
