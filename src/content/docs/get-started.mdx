@@ -13,13 +13,13 @@ export const old_controller = `class ProjectController extends Controller
         path: '/projects/{uuid}',
         operationId: 'get-project-by-uuid',
         parameters: [
-            new OA\Parameter(name: 'uuid', in: 'path', required: true, description: 'Project UUID', schema: new OA\Schema(type: 'string')),
+            new OA\\Parameter(name: 'uuid', in: 'path', required: true, description: 'Project UUID', schema: new OA\Schema(type: 'string')),
         ],
         responses: [
-            new OA\Response(
+            new OA\\Response(
                 response: 200,
                 description: 'Project details',
-                content: new OA\JsonContent(ref: '#/components/schemas/Project')),
+                content: new OA\\JsonContent(ref: '#/components/schemas/Project')),
         ]
     )]
     public function project_by_uuid(Request $request)
