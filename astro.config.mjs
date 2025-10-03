@@ -15,7 +15,6 @@ export default defineConfig({
                 baseUrl: 'https://github.com/apioo/psx-website/edit/main/',
             },
 			social: [
-                { icon: 'github', label: 'GitHub', href: 'https://github.com/apioo/psx-website' },
                 { icon: 'discord', label: 'Discord', href: 'https://discord.gg/eMrMgwsc6e' },
             ],
             customCss: ['./src/assets/landing.css'],
